@@ -22,7 +22,7 @@ def get_all_states(state):
     b = state[1]
     c = state[2]
 
-    if a == 8:  # and b == 6:  # TODO
+    if a == 10 and b == 6 and c == 5:  # TODO
         ans.append(state)
         return True
 
@@ -34,98 +34,102 @@ def get_all_states(state):
 
     # empty jug a
     if a >= 0:
-        if a > 0:
-            if get_all_states((0, b, c)):
+        # empty A to ground
+        if get_all_states((0, b, c)):
+            ans.append(state)
+            return True
+        # fill a
+        if a < x:
+            if get_all_states((x, b, c)):
                 ans.append(state)
                 return True
-            # empty a into b
-            if a + b <= y:
-                if get_all_states((0, a + b, c)):
-                    ans.append(state)
-                    return True
-            else:
-                if get_all_states((a - (y - b), y, c)):
-                    ans.append(state)
-                    return True
-            # empty a into c
-            if a + c <= z:
-                if get_all_states((0, b, a + c)):
-                    ans.append(state)
-                    return True
-            else:
-                if get_all_states((a - (z - c), b, z)):
-                    ans.append(state)
-                    return True
-
-        if a == 0:
-            if get_all_states((x, b, c)):
+        # empty a into b
+        if a + b <= y:
+            if get_all_states((0, a + b, c)):
+                ans.append(state)
+                return True
+        else:
+            if get_all_states((a - (y - b), y, c)):
+                ans.append(state)
+                return True
+        # empty a into c
+        if a + c <= z:
+            if get_all_states((0, b, a + c)):
+                ans.append(state)
+                return True
+        else:
+            if get_all_states((a - (z - c), b, z)):
                 ans.append(state)
                 return True
 
     # empty jug b
     if b >= 0:
-        if b > 0:
-            if get_all_states((a, 0, c)):
+        if get_all_states((a, 0, c)):
+            ans.append(state)
+            return True
+        # fill a
+        if b < y:
+            if get_all_states((a, y, c)):
                 ans.append(state)
                 return True
-            # empty b into a
-            if a + b <= x:
-                if get_all_states((a + b, 0, c)):
-                    ans.append(state)
-                    return True
-            else:
-                if get_all_states((x, b - (x - a), c)):
-                    ans.append(state)
-                    return True
-            # empty b into c
-            if b + c <= z:
-                if get_all_states((a, 0, b + c)):
-                    ans.append(state)
-                    return True
-            else:
-                if get_all_states((a, b - (z - c), z)):
-                    ans.append(state)
-                    return True
-        if b == 0:
-            if get_all_states((a, y, c)):
+        # empty b into a
+        if a + b <= x:
+            if get_all_states((a + b, 0, c)):
+                ans.append(state)
+                return True
+        else:
+            if get_all_states((x, b - (x - a), c)):
+                ans.append(state)
+                return True
+        # empty b into c
+        if b + c <= z:
+            if get_all_states((a, 0, b + c)):
+                ans.append(state)
+                return True
+        else:
+            if get_all_states((a, b - (z - c), z)):
                 ans.append(state)
                 return True
 
     # empty jug c
     if c >= 0:
-        if c > 0:
-            if get_all_states((a, b, 0)):
+        if get_all_states((a, b, 0)):
+            ans.append(state)
+            return True
+        # fill a
+        if c < z:
+            if get_all_states((a, b, z)):
                 ans.append(state)
                 return True
-            # empty c into a
-            if a + c <= x:
-                if get_all_states((a + c, b, 0)):
-                    ans.append(state)
-                    return True
-            else:
-                if get_all_states((x, b, c - (x - a))):
-                    ans.append(state)
-                    return True
-            # empty c into b
-            if b + c <= y:
-                if get_all_states((a, b + c, 0)):
-                    ans.append(state)
-                    return True
-            else:
-                if get_all_states((a, y, c - (y - b))):
-                    ans.append(state)
-                    return True
-        if c == 0:
-            if get_all_states((a, b, z)):
+        # empty c into a
+        if a + c <= x:
+            if get_all_states((a + c, b, 0)):
+                ans.append(state)
+                return True
+        else:
+            if get_all_states((x, b, c - (x - a))):
+                ans.append(state)
+                return True
+        # empty c into b
+        if b + c <= y:
+            if get_all_states((a, b + c, 0)):
+                ans.append(state)
+                return True
+        else:
+            if get_all_states((a, y, c - (y - b))):
                 ans.append(state)
                 return True
 
     return False
 
 
-initial_state = (10, 0, 0)  # TODO
-print("Starting work...\n")
-get_all_states(initial_state)
-ans.reverse()
-for i in ans:
-    print(i)
+def main():
+    initial_state = (0, 0, 0)  # TODO
+    print("Starting work...\n")
+    get_all_states(initial_state)
+    ans.reverse()
+    for i in ans:
+        print(i)
+
+
+main()
