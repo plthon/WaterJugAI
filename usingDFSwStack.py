@@ -231,7 +231,6 @@ def solution():
             if checkIfEncountered(currentStack):
                 print(currentStack)
                 keepsTrackOfCurrentLevel.push(currentLevel + 1)
-                kkk
 """
 
 def main():
