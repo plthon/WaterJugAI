@@ -46,6 +46,35 @@ def solution():
             solved = True
             break
 
+        if a >= 0:
+            # empty A to ground
+            if checkIfEncountered((0, b, c)):
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                return True
+            # fill a
+            elif a < B1:
+                if checkIfEncountered((B1, b, c)):
+                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                    return True
+            # empty a into b
+            elif a + b <= B2:
+                if checkIfEncountered((0, a + b, c)):
+                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                    return True
+            elif a + b >= B2:
+                if checkIfEncountered((a - (B2 - b), B2, c)):
+                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                    return True
+            # empty a into c
+            elif a + c <= B3:
+                if checkIfEncountered((0, b, a + c)):
+                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                    return True
+            elif a + c >= B3:
+                if checkIfEncountered((a - (B3 - c), b, B3)):
+                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                    return True
+"""
         if a > 0:
             currentStack = (0, b, c)
             if checkIfEncountered(currentStack):
@@ -76,7 +105,7 @@ def solution():
             if checkIfEncountered(currentStack):
                 print(currentStack)
                 keepsTrackOfCurrentLevel.push(currentLevel + 1)
-        ###
+"""        ###
         elif b > 0:
             currentStack = (a, 0, c)
             if checkIfEncountered(currentStack):
