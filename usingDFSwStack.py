@@ -22,7 +22,11 @@ def checkIfEncountered(stackX):
     if stackX not in alEn:
         stack.push(stackX)
         alEn.append(stackX)
-        return True
+        print(stackX)
+        if stackX[0] == X and stackX[1] == Y and stackX[2] == Z:
+            print("We reached here")
+            solvedX = True
+            return True
     return False
 
 
@@ -30,50 +34,110 @@ def solution():
     stack.push(CuSta)
     alEn.append(CuSta)
     keepsTrackOfCurrentLevel.push(0)
-    solved = False
+    # solved = False
     steps = 0
 
     while not stack.isEmpty():
+        if solvedX:
+            break
         steps += 1
         tempint = 0
         currentStack = stack.pop()
         a = currentStack[0]
         b = currentStack[1]
         c = currentStack[2]
-        currentLevel = keepsTrackOfCurrentLevel.pop()
+        # currentLevel = keepsTrackOfCurrentLevel.pop()
+        # print(a, b, c)
 
-        if a == X and b == Y and c == Z:
-            solved = True
-            break
+    #    if a == X and b == Y and c == Z:
+    #        solved = True
+    #        break
 
         if a >= 0:
             # empty A to ground
             if checkIfEncountered((0, b, c)):
                 keepsTrackOfCurrentLevel.push(currentLevel + 1)
-                return True
+                break
             # fill a
-            elif a < B1:
+            if a < B1:
                 if checkIfEncountered((B1, b, c)):
                     keepsTrackOfCurrentLevel.push(currentLevel + 1)
-                    return True
+                    break
             # empty a into b
-            elif a + b <= B2:
+            if a + b <= B2:
                 if checkIfEncountered((0, a + b, c)):
                     keepsTrackOfCurrentLevel.push(currentLevel + 1)
-                    return True
-            elif a + b >= B2:
+                    break
+            if a + b >= B2:
                 if checkIfEncountered((a - (B2 - b), B2, c)):
                     keepsTrackOfCurrentLevel.push(currentLevel + 1)
-                    return True
+                    break
             # empty a into c
-            elif a + c <= B3:
+            if a + c <= B3:
                 if checkIfEncountered((0, b, a + c)):
                     keepsTrackOfCurrentLevel.push(currentLevel + 1)
-                    return True
-            elif a + c >= B3:
+                    break
+            if a + c >= B3:
                 if checkIfEncountered((a - (B3 - c), b, B3)):
                     keepsTrackOfCurrentLevel.push(currentLevel + 1)
-                    return True
+                    break
+
+        if b >= 0:
+            if checkIfEncountered((a, 0, c)):
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                break
+            # fill a
+            if b < B2:
+                if checkIfEncountered((a, B2, c)):
+                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                    break
+            # empty b into a
+            if a + b <= B1:
+                if checkIfEncountered((a + b, 0, c)):
+                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                    break
+            if a + b >= B1:
+                if checkIfEncountered((B1, b - (B1 - a), c)):
+                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                    break
+            # empty b into c
+            if b + c <= B3:
+                if checkIfEncountered((a, 0, b + c)):
+                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                    break
+            if b + c >= B3:
+                if checkIfEncountered((a, b - (B3 - c), B3)):
+                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                    break
+
+        # empty jug c
+        if c >= 0:
+            if checkIfEncountered((a, b, 0)):
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                break
+            # fill a
+            if c < B3:
+                if checkIfEncountered((a, b, B3)):
+                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                    break
+            # empty c into a
+            if a + c <= B1:
+                if checkIfEncountered((a + c, b, 0)):
+                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                    break
+            if a + c >= B1:
+                if checkIfEncountered((B1, b, c - (B1 - a))):
+                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                    break
+            # empty c into b
+            if b + c <= B2:
+                if checkIfEncountered((a, b + c, 0)):
+                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                    break
+            if b + c >= B2:
+                if checkIfEncountered((a, B2, c - (B2 - b))):
+                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
+                    break
 """
         if a > 0:
             currentStack = (0, b, c)
@@ -105,7 +169,7 @@ def solution():
             if checkIfEncountered(currentStack):
                 print(currentStack)
                 keepsTrackOfCurrentLevel.push(currentLevel + 1)
-"""        ###
+   
         elif b > 0:
             currentStack = (a, 0, c)
             if checkIfEncountered(currentStack):
@@ -136,7 +200,7 @@ def solution():
             if checkIfEncountered(currentStack):
                 print(currentStack)
                 keepsTrackOfCurrentLevel.push(currentLevel + 1)
-        ###
+        
         elif c > 0:
             currentStack = (a, b, 0)
             if checkIfEncountered(currentStack):
@@ -167,7 +231,7 @@ def solution():
             if checkIfEncountered(currentStack):
                 print(currentStack)
                 keepsTrackOfCurrentLevel.push(currentLevel + 1)
-
+"""
 
 def main():
     print(CuSta)
@@ -178,10 +242,10 @@ def main():
 B1 = 10
 B2 = 6
 B3 = 5
-x = 2
+x = 3
 y = 0
 z = 0
-X = 4
+X = 7
 Y = 0
 Z = 0
 
@@ -190,5 +254,6 @@ keepsTrackOfCurrentLevel = Stack()
 CuSta = (x, y, z)
 alEn = []
 level = 0
+solvedX = False
 
 main()
