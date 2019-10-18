@@ -22,9 +22,11 @@ def checkIfEncountered(stackX):
     if stackX not in alEn:
         stack.push(stackX)
         alEn.append(stackX)
+        currentLevel = keepsTrackOfCurrentLevel.pop()
+        keepsTrackOfCurrentLevel.push(currentLevel + 1)
         print(stackX)
         if stackX[0] == X and stackX[1] == Y and stackX[2] == Z:
-            print("We reached here")
+            print("Completed")
             solvedX = True
             return True
     return False
@@ -46,97 +48,73 @@ def solution():
         a = currentStack[0]
         b = currentStack[1]
         c = currentStack[2]
-        # currentLevel = keepsTrackOfCurrentLevel.pop()
-        # print(a, b, c)
-
-    #    if a == X and b == Y and c == Z:
-    #        solved = True
-    #        break
 
         if a >= 0:
             # empty A to ground
             if checkIfEncountered((0, b, c)):
-                keepsTrackOfCurrentLevel.push(currentLevel + 1)
                 break
             # fill a
             if a < B1:
                 if checkIfEncountered((B1, b, c)):
-                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
                     break
             # empty a into b
             if a + b <= B2:
                 if checkIfEncountered((0, a + b, c)):
-                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
                     break
             if a + b >= B2:
                 if checkIfEncountered((a - (B2 - b), B2, c)):
-                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
                     break
             # empty a into c
             if a + c <= B3:
                 if checkIfEncountered((0, b, a + c)):
-                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
                     break
             if a + c >= B3:
                 if checkIfEncountered((a - (B3 - c), b, B3)):
-                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
                     break
 
         if b >= 0:
             if checkIfEncountered((a, 0, c)):
-                keepsTrackOfCurrentLevel.push(currentLevel + 1)
                 break
             # fill a
             if b < B2:
                 if checkIfEncountered((a, B2, c)):
-                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
                     break
             # empty b into a
             if a + b <= B1:
                 if checkIfEncountered((a + b, 0, c)):
-                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
                     break
             if a + b >= B1:
                 if checkIfEncountered((B1, b - (B1 - a), c)):
-                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
                     break
             # empty b into c
             if b + c <= B3:
                 if checkIfEncountered((a, 0, b + c)):
-                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
                     break
             if b + c >= B3:
                 if checkIfEncountered((a, b - (B3 - c), B3)):
-                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
                     break
 
         # empty jug c
         if c >= 0:
             if checkIfEncountered((a, b, 0)):
-                keepsTrackOfCurrentLevel.push(currentLevel + 1)
                 break
             # fill a
             if c < B3:
                 if checkIfEncountered((a, b, B3)):
-                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
                     break
             # empty c into a
             if a + c <= B1:
                 if checkIfEncountered((a + c, b, 0)):
-                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
                     break
             if a + c >= B1:
                 if checkIfEncountered((B1, b, c - (B1 - a))):
-                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
                     break
             # empty c into b
             if b + c <= B2:
                 if checkIfEncountered((a, b + c, 0)):
-                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
                     break
             if b + c >= B2:
                 if checkIfEncountered((a, B2, c - (B2 - b))):
-                    keepsTrackOfCurrentLevel.push(currentLevel + 1)
                     break
 """
         if a > 0:
