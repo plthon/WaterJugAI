@@ -48,21 +48,6 @@ def checkIfEncountered(bottle, level):
                 else:
                     MEMORY[level + 1] = [tempMemory]
                 break
-        """
-        for parentList in MEMORY[level]:
-            if parentList[-1].getID() == bottle.parent:
-                tempKKKK = deepcopy(MEMORY)
-                tempMemory = tempKKKK.get(level)[index]
-                print("here: ", MEMORY)
-                tempMemory.append(bottle)  # TODO
-                index += 1
-                if level+1 in allKeys:
-                    MEMORY[level+1].append(tempMemory)
-                else:
-                    MEMORY[level+1] = [tempMemory]
-                break
-"""
-
         return True
     return False
 
