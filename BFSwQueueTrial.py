@@ -57,7 +57,7 @@ def BFS(x, y, target):
                 queue.add((c, d))
 
         queue.add((x, 0))
-        queue.add(0, y)
+        queue.add((0, y))
 
     if not isSolvable:
         print("No solution")

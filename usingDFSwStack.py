@@ -118,6 +118,101 @@ def main():
                     break
 
 
+"""
+        if a > 0:
+            currentStack = (0, b, c)
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+        elif a < B1:
+            currentStack = (B1, b, c)
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+        elif a + b <= B2:
+            currentStack = (0, a + b, c)
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+        elif a + b > B2:
+            currentStack = (a - (B2 - b), B2, c)
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+        elif a + c <= B3:
+            currentStack = (0, b, c + a)
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+        elif a + c > B3:
+            currentStack = (a - (B3 - c), b, B3)
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+
+        elif b > 0:
+            currentStack = (a, 0, c)
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+        elif b < B2:
+            currentStack = (a, B2, c)
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+        elif b + a <= B1:
+            currentStack = (a + b, 0, c)
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+        elif b + a > B1:
+            currentStack = (B1, b - (B1 - a), c)
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+        elif b + c <= B3:
+            currentStack = (a, 0, c + b)
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+        elif b + c > B3:
+            currentStack = (a, b - (B3 - c), B3)
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+
+        elif c > 0:
+            currentStack = (a, b, 0)
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+        elif c < B3:
+            currentStack = (a, b, B3)
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+        elif a + c <= B1:
+            currentStack = (a + c, b, 0)
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+        elif a + c > B1:
+            currentStack = (B1, B2, c - (B1 - a))
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+        elif c + b <= B2:
+            currentStack = (a, b + c, 0)
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+        elif c + b > B2:
+            currentStack = (a, B2, c - (B2 - b))
+            if checkIfEncountered(currentStack):
+                print(currentStack)
+                keepsTrackOfCurrentLevel.push(currentLevel + 1)
+"""
+
 B1 = 10
 B2 = 6
 B3 = 5
