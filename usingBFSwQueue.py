@@ -11,7 +11,7 @@ class Queue:
         self.items.insert(0, item)
 
     def get(self):
-        return self.items.pop(0)
+        return self.items.pop()
 
     def size(self):
         return len(self.items)
@@ -41,7 +41,7 @@ def checkIfEncountered(bottle, level):
                 tempMemory = []
                 for item in MEMORY.get(level)[index]:
                     tempMemory.append(item)
-                tempMemory.append(bottle)  # TODO
+                tempMemory.append(bottle)
                 index += 1
                 if level + 1 in allKeys:
                     MEMORY[level + 1].append(tempMemory)
@@ -122,7 +122,7 @@ def main():
             checkIfEncountered(Bottle(bottle.x, 0, bottle.z, parentBottle.getID()), level)
 
         # Empty Z
-        if bottle.x > 0:
+        if bottle.z > 0:
             checkIfEncountered(Bottle(bottle.x, bottle.y, 0, parentBottle.getID()), level)
 
         # Pour X to Y when X + Y <= B2
