@@ -148,9 +148,9 @@ def main():
             for list1 in MEMORY:
                 for list2 in MEMORY[list1]:
                     if list2[-1].getID() == [X, Y, Z]:
-                        itemLevel = 0
+                        itemLevel = 1
                         for item in list2:
-                            print(itemLevel, ": " + item.x, " | ", item.y, " | ", item.z, "\n")
+                            print(itemLevel, ": ", item.x, " | ", item.y, " | ", item.z, "\n")
                             itemLevel += 1
                         break
             break
