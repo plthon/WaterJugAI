@@ -131,6 +131,8 @@ def main():
 
         # If all bottles achieve required litres
         if bottle.x == X and bottle.y == Y and bottle.z == Z:
+
+            print("\nSolution is found!:\n")
             bottleList = []
             while bottle:
                 bottleList.append(bottle)
@@ -148,16 +150,30 @@ def main():
 
         allPossibleRules(bottle)
 
+def validateInput():
+    B1 = int(input("Please enter Max Volume of Bottle 1: "))
+    B2 = int(input("Please enter Max Volume of Bottle 2: "))
+    B3 = int(input("Please enter Max Volume of Bottle 3: "))
+    print()
+    a = int(input("Please enter Start Volume of Bottle 1: "))
+    b = int(input("Please enter Start Volume of Bottle 2: "))
+    c = int(input("Please enter Start Volume of Bottle 3: "))
+    print()
+    X = int(input("Please enter Goal Volume of Bottle 1: "))
+    Y = int(input("Please enter Goal Volume of Bottle 2: "))
+    Z = int(input("Please enter Goal Volume of Bottle 3: "))
+    print()
 
-B1 = 10
-B2 = 6
-B3 = 5
-a = 2
-b = 0
-c = 0
-X = 9
-Y = 6
-Z = 3
-queue = Queue()
-alreadyEncountered = []
-main()
+    if a > B1 or b > B2 or c > B3 or \
+        X > B1 or Y > B2 or Z > B3:
+        print("No possible solution!")
+    else:
+        return B1, B2, B3, a, b, c, X, Y, Z, True
+
+
+B1, B2, B3, a, b, c, X, Y, Z, runnable = validateInput()
+if runnable:
+    print("Processing...")
+    queue = Queue()
+    alreadyEncountered = []
+    main()
