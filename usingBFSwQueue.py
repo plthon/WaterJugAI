@@ -52,6 +52,80 @@ def checkIfEncountered(bottle, level):
     return False
 
 
+def allPossibleRules(bottle, parentBottle, level):
+    # Fill X
+    if bottle.x < B1:
+        checkIfEncountered(Bottle(B1, bottle.y, bottle.z, parentBottle.getID()), level)
+
+    # Fill Y
+    if bottle.y < B2:
+        checkIfEncountered(Bottle(bottle.x, B2, bottle.z, parentBottle.getID()), level)
+
+    # Fill Z
+    if bottle.z < B3:
+        checkIfEncountered(Bottle(bottle.x, bottle.y, B3, parentBottle.getID()), level)
+
+    # Empty X
+    if bottle.x > 0:
+        checkIfEncountered(Bottle(0, bottle.y, bottle.z, parentBottle.getID()), level)
+
+    # Empty Y
+    if bottle.y > 0:
+        checkIfEncountered(Bottle(bottle.x, 0, bottle.z, parentBottle.getID()), level)
+
+    # Empty Z
+    if bottle.z > 0:
+        checkIfEncountered(Bottle(bottle.x, bottle.y, 0, parentBottle.getID()), level)
+
+    # Pour X to Y when X + Y <= B2
+    if bottle.x + bottle.y <= B2 and bottle.x != 0:
+        checkIfEncountered(Bottle(0, bottle.y + bottle.x, bottle.z, parentBottle.getID()), level)
+
+    # Pour X to Y when X + Y >= B2
+    if bottle.x + bottle.y >= B2 and bottle.x != 0:
+        checkIfEncountered(Bottle(bottle.x - (B2 - bottle.y), B2, bottle.z, parentBottle.getID()), level)
+
+    # Pour X to Z when X + Z <= B3
+    if bottle.x + bottle.z <= B3 and bottle.x != 0:
+        checkIfEncountered(Bottle(0, bottle.y, bottle.z + bottle.x, parentBottle.getID()), level)
+
+    # Pour X to Z when X + Z >= B3
+    if bottle.x + bottle.z >= B3 and bottle.x != 0:
+        checkIfEncountered(Bottle(bottle.x - (B3 - bottle.z), bottle.y, B3, parentBottle.getID()), level)
+
+    # Pour Y to X when Y + X <= B1
+    if bottle.y + bottle.x <= B1 and bottle.y != 0:
+        checkIfEncountered(Bottle(bottle.x + bottle.y, 0, bottle.z, parentBottle.getID()), level)
+
+    # Pour Y to X when Y + X >= B1
+    if bottle.y + bottle.x >= B1 and bottle.y != 0:
+        checkIfEncountered(Bottle(B1, bottle.y - (B1 - bottle.x), bottle.z, parentBottle.getID()), level)
+
+    # Pour Y to Z when Y + Z <= B3
+    if bottle.y + bottle.z <= B3 and bottle.y != 0:
+        checkIfEncountered(Bottle(bottle.x, 0, bottle.z + bottle.y, parentBottle.getID()), level)
+
+    # Pour Y to Z when Y + Z >= B3
+    if bottle.y + bottle.z >= B3 and bottle.y != 0:
+        checkIfEncountered(Bottle(bottle.x, bottle.y - (B3 - bottle.z), B3, parentBottle.getID()), level)
+
+    # Pour Z to X when Z + X <= B1
+    if bottle.z + bottle.x <= B1 and bottle.z != 0:
+        checkIfEncountered(Bottle(bottle.x + bottle.z, bottle.y, 0, parentBottle.getID()), level)
+
+    # Pour Z to X when Z + X >= B1
+    if bottle.z + bottle.x >= B1 and bottle.z != 0:
+        checkIfEncountered(Bottle(B1, bottle.y, bottle.z - (B1 - bottle.x), parentBottle.getID()), level)
+
+    # Pour Z to Y when Z + Y <= B2
+    if bottle.z + bottle.x <= B2 and bottle.z != 0:
+        checkIfEncountered(Bottle(bottle.x, bottle.y + bottle.z, 0, parentBottle.getID()), level)
+
+    # Pour Z to Y when Z + Y >= B2
+    if bottle.z + bottle.x >= B2 and bottle.z != 0:
+        checkIfEncountered(Bottle(bottle.x, B2, bottle.z - (B2 - bottle.y), parentBottle.getID()), level)
+
+
 def main():
     bottle = Bottle(a, b, c, ["Initial"])
     queue.add(bottle)
@@ -86,77 +160,7 @@ def main():
         # If no possible solution
         # TODO exit when no possible solution
 
-        # Fill X
-        if bottle.x < B1:
-            checkIfEncountered(Bottle(B1, bottle.y, bottle.z, parentBottle.getID()), level)
-
-        # Fill Y
-        if bottle.y < B2:
-            checkIfEncountered(Bottle(bottle.x, B2, bottle.z, parentBottle.getID()), level)
-
-        # Fill Z
-        if bottle.z < B3:
-            checkIfEncountered(Bottle(bottle.x, bottle.y, B3, parentBottle.getID()), level)
-
-        # Empty X
-        if bottle.x > 0:
-            checkIfEncountered(Bottle(0, bottle.y, bottle.z, parentBottle.getID()), level)
-
-        # Empty Y
-        if bottle.y > 0:
-            checkIfEncountered(Bottle(bottle.x, 0, bottle.z, parentBottle.getID()), level)
-
-        # Empty Z
-        if bottle.z > 0:
-            checkIfEncountered(Bottle(bottle.x, bottle.y, 0, parentBottle.getID()), level)
-
-        # Pour X to Y when X + Y <= B2
-        if bottle.x + bottle.y <= B2 and bottle.x != 0:
-            checkIfEncountered(Bottle(0, bottle.y + bottle.x, bottle.z, parentBottle.getID()), level)
-
-        # Pour X to Y when X + Y >= B2
-        if bottle.x + bottle.y >= B2 and bottle.x != 0:
-            checkIfEncountered(Bottle(bottle.x - (B2 - bottle.y), B2, bottle.z, parentBottle.getID()), level)
-
-        # Pour X to Z when X + Z <= B3
-        if bottle.x + bottle.z <= B3 and bottle.x != 0:
-            checkIfEncountered(Bottle(0, bottle.y, bottle.z + bottle.x, parentBottle.getID()), level)
-
-        # Pour X to Z when X + Z >= B3
-        if bottle.x + bottle.z >= B3 and bottle.x != 0:
-            checkIfEncountered(Bottle(bottle.x - (B3 - bottle.z), bottle.y, B3, parentBottle.getID()), level)
-
-        # Pour Y to X when Y + X <= B1
-        if bottle.y + bottle.x <= B1 and bottle.y != 0:
-            checkIfEncountered(Bottle(bottle.x + bottle.y, 0, bottle.z, parentBottle.getID()), level)
-
-        # Pour Y to X when Y + X >= B1
-        if bottle.y + bottle.x >= B1 and bottle.y != 0:
-            checkIfEncountered(Bottle(B1, bottle.y - (B1 - bottle.x), bottle.z, parentBottle.getID()), level)
-
-        # Pour Y to Z when Y + Z <= B3
-        if bottle.y + bottle.z <= B3 and bottle.y != 0:
-            checkIfEncountered(Bottle(bottle.x, 0, bottle.z + bottle.y, parentBottle.getID()), level)
-
-        # Pour Y to Z when Y + Z >= B3
-        if bottle.y + bottle.z >= B3 and bottle.y != 0:
-            checkIfEncountered(Bottle(bottle.x, bottle.y - (B3 - bottle.z), B3, parentBottle.getID()), level)
-
-        # Pour Z to X when Z + X <= B1
-        if bottle.z + bottle.x <= B1 and bottle.z != 0:
-            checkIfEncountered(Bottle(bottle.x + bottle.z, bottle.y, 0, parentBottle.getID()), level)
-
-        # Pour Z to X when Z + X >= B1
-        if bottle.z + bottle.x >= B1 and bottle.z != 0:
-            checkIfEncountered(Bottle(B1, bottle.y, bottle.z - (B1 - bottle.x), parentBottle.getID()), level)
-
-        # Pour Z to Y when Z + Y <= B2
-        if bottle.z + bottle.x <= B2 and bottle.z != 0:
-            checkIfEncountered(Bottle(bottle.x, bottle.y + bottle.z, 0, parentBottle.getID()), level)
-
-        # Pour Z to Y when Z + Y >= B2
-        if bottle.z + bottle.x >= B2 and bottle.z != 0:
-            checkIfEncountered(Bottle(bottle.x, B2, bottle.z - (B2 - bottle.y), parentBottle.getID()), level)
+        allPossibleRules(bottle, parentBottle, level)
 
         """
         # TODO something
