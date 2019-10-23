@@ -126,7 +126,6 @@ def main():
     bottle = Bottle(a, b, c, None)
     queue.add(bottle)
     alreadyEncountered.append(bottle)
-    # MEMORY[1] = [[bottle]]
     while not queue.isEmpty():
         bottle = queue.get()
 
@@ -156,9 +155,9 @@ B3 = 5
 a = 2
 b = 0
 c = 0
-X = 4
-Y = 0
-Z = 0
+X = 9
+Y = 6
+Z = 3
 queue = Queue()
 alreadyEncountered = []
 main()
