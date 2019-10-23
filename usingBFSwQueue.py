@@ -1,5 +1,3 @@
-from copy import deepcopy
-
 class Queue:
     def __init__(self):
         self.items = []
