@@ -1,3 +1,7 @@
+from abc import ABCMeta, abstractmethod
+import queue as Q
+
+
 class Queue:
     def __init__(self):
         self.items = []
@@ -13,6 +17,51 @@ class Queue:
 
     def size(self):
         return len(self.items)
+
+
+class Solver(metaclass=ABCMeta):
+    @abstractmethod
+    def get(self):
+        raise NotImplementedError()
+    @abstractmethod
+    def add(self):
+        raise NotImplementedError()
+
+
+class SolverX(Solver):
+    def __init__(self, goal, xx, yy, zz):
+        self.pq = Q.PriorityQueue()
+        self.goal = goal
+        self.x = xx
+        self.y = yy
+        self.z = zz
+
+    def get(self):
+        if not self.pq.empty():
+            (val, bottleX) = self.pq.get()
+            return bottleX
+        else:
+            return None
+
+    def add(self, bottleX):
+        value = self.heuristic(bottleX)
+        self.pq.put((value, bottleX))
+
+    def heuristic(self, bottleX):
+        count = 0
+        if bottleX.x > X:
+            count += bottleX.x - X
+        else:
+            count += X - bottleX.x
+        if bottleX.y > Y:
+            count += bottleX.y - Y
+        else:
+            count += Y - bottleX.y
+        if bottleX.z > Z:
+            count += bottleX.z - Z
+        else:
+            count += Z - bottleX.z
+        return count
 
 
 class Bottle:
