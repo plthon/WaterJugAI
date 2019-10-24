@@ -133,6 +133,7 @@ def main():
 
         allPossibleRules(bottle)
 
+
 def validateInput():
     B1 = int(input("Please enter Max Volume of Bottle 1: "))
     B2 = int(input("Please enter Max Volume of Bottle 2: "))
