@@ -74,9 +74,10 @@ class Bottle:
 
 
 def checkIfEncountered(bottle):
-    if bottle not in alreadyEncountered:
+    bottleT = (bottle.x, bottle.y, bottle.z)
+    if bottleT not in alreadyEncountered:
         queue.add(bottle)
-        alreadyEncountered.append(bottle)
+        alreadyEncountered.append(bottleT)
 
 
 def allPossibleRules(bottle):
@@ -174,13 +175,16 @@ def main():
             for item in bottleList:
                 print(n, ": ", item.x, " | ", item.y, " | ", item.z, " | ", item.action, "\n")
                 n += 1
-            print("Finished.")
-            break
+            print("Goal state reached. Number of steps:", n-1)
+            return True
 
         # If no possible solution
         # TODO exit when no possible solution
 
         allPossibleRules(bottle)
+
+    return False
+
 
 def validateInput():
     B1 = int(input("Please enter Max Volume of Bottle 1: "))
@@ -209,4 +213,6 @@ if runnable:
           "\nis probably no solution. Please terminate the program!)")
     queue = Queue()
     alreadyEncountered = []
-    main()
+    solved = main()
+    if not solved:
+        print("No possible solution!")

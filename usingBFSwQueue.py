@@ -25,9 +25,10 @@ class Bottle:
 
 
 def checkIfEncountered(bottle):
-    if bottle not in alreadyEncountered:
+    bottleT = (bottle.x, bottle.y, bottle.z)
+    if bottleT not in alreadyEncountered:
         queue.add(bottle)
-        alreadyEncountered.append(bottle)
+        alreadyEncountered.append(bottleT)
 
 
 def allPossibleRules(bottle):
@@ -113,7 +114,7 @@ def main():
 
         # If all bottles achieve required litres
         if bottle.x == X and bottle.y == Y and bottle.z == Z:
-            print("\nSolution is found!:\n\n"
+            print("Solution is found!:\n\n"
                   "Max: ", B1, " | ", B2, " | ", B3, "\n")
             bottleList = []
             while bottle:
@@ -125,13 +126,14 @@ def main():
             for item in bottleList:
                 print(n, ": ", item.x, " | ", item.y, " | ", item.z, " | ", item.action, "\n")
                 n += 1
-            print("Finished.")
-            break
+            print("Goal state reached. Number of steps:", n-1)
+            return True
 
         # If no possible solution
         # TODO exit when no possible solution
 
         allPossibleRules(bottle)
+    return False
 
 
 def validateInput():
@@ -149,7 +151,7 @@ def validateInput():
     print()
 
     if a > B1 or b > B2 or c > B3 or \
-        X > B1 or Y > B2 or Z > B3:
+            X > B1 or Y > B2 or Z > B3:
         print("No possible solution!")
     else:
         return B1, B2, B3, a, b, c, X, Y, Z, True
@@ -157,8 +159,9 @@ def validateInput():
 
 B1, B2, B3, a, b, c, X, Y, Z, runnable = validateInput()
 if runnable:
-    print("Processing... (If solution won't show up after 15 seconds, there"
-          "\nis probably no solution. Please terminate the program!)")
+    print("Processing...\n")
     queue = Queue()
     alreadyEncountered = []
-    main()
+    solved = main()
+    if not solved:
+        print("No possible solution!")
