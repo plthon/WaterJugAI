@@ -133,10 +133,8 @@ def main():
             print("Goal state reached. Number of steps:", n-1)
             return True
 
-        # If no possible solution
-        # TODO exit when no possible solution
-
         allPossibleRules(bottle)
+
     return False
 
 

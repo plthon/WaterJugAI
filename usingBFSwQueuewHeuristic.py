@@ -33,12 +33,12 @@ class Solver(metaclass=ABCMeta):
 
 
 class SolverX(Solver):
-    def __init__(self, goal, xx, yy, zz):
+    def __init__(self):
         self.pq = Q.PriorityQueue()
-        self.goal = goal
-        self.x = xx
-        self.y = yy
-        self.z = zz
+        #self.goal = goal
+        #self.x = xx
+        #self.y = yy
+        #self.z = zz
 
     def get(self):
         if not self.pq.empty():
@@ -67,6 +67,9 @@ class SolverX(Solver):
             count += Z - bottleX.z
         return count
 
+    def isEmpty(self):
+        return self.pq == []
+
 
 class Bottle:
     def __init__(self, xx, yy, zz, bottle, string):
@@ -80,7 +83,7 @@ class Bottle:
 def checkIfEncountered(bottle):
     bottleT = (bottle.x, bottle.y, bottle.z)
     if bottleT not in alreadyEncountered:
-        queue.add(bottle)
+        solver.add(bottle)
         alreadyEncountered.append(bottleT)
 
 
@@ -160,10 +163,10 @@ def allPossibleRules(bottle):
 
 def main():
     bottle = Bottle(a, b, c, None, "Start State")
-    queue.add(bottle)
+    solver.add(bottle)
     alreadyEncountered.append(bottle)
-    while not queue.isEmpty():
-        bottle = queue.get()
+    while not solver.isEmpty():
+        bottle = solver.get()
 
         # If all bottles achieve required litres
         if bottle.x == X and bottle.y == Y and bottle.z == Z:
@@ -181,9 +184,6 @@ def main():
                 n += 1
             print("Goal state reached. Number of steps:", n-1)
             return True
-
-        # If no possible solution
-        # TODO exit when no possible solution
 
         allPossibleRules(bottle)
 
@@ -213,9 +213,8 @@ def validateInput():
 
 B1, B2, B3, a, b, c, X, Y, Z, runnable = validateInput()
 if runnable:
-    print("Processing... (If solution won't show up after 15 seconds, there"
-          "\nis probably no solution. Please terminate the program!)")
-    queue = Queue()
+    print("Processing...")
+    solver = SolverX()
     alreadyEncountered = []
     solved = main()
     if not solved:
